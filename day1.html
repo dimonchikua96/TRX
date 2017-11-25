@@ -12,8 +12,8 @@
             width: 400px;
         }
 
-        table{
-            float: left;
+        body {
+            padding: 50px;
         }
 
         table td {
@@ -21,16 +21,18 @@
             text-align: center;
             font-size: 30px;
             font-weight: bold;
+            vertical-align: top;
         }
 
-        #timer{
-           margin-top: 50px;
-           margin-left: 100px;
-            float: left;
+        #timer {
+            margin-top: 50px;
+            right: 100px;
             font-size: 100px;
+            position: fixed;
+            bottom: 0px;
         }
-        
-        #repeat{
+
+        #repeat {
             background-image: url("icons/repeate.png");
         }
 
@@ -44,10 +46,16 @@
             float: left;
             margin: 1em;
         }
+
         .ten {
-            background-image:
-                    linear-gradient(2deg, transparent 50%, white 50%),
-                    linear-gradient(90deg, white 50%, transparent 50%);
+            background-image: linear-gradient(2deg, transparent 50%, white 50%),
+            linear-gradient(90deg, white 50%, transparent 50%);
+        }
+
+        .ex_name {
+            padding-top: 40px;
+            padding-bottom: 10px;
+            font-size: 30px;
         }
 
     </style>
@@ -55,38 +63,163 @@
         var val = 0;
         setInterval(function () {
             val++;
-            if(val>30){
+            if (val > 30) {
                 val = 0;
             }
             document.getElementById('timer').innerHTML = val;
-        },1000)
-    </script>
+        }, 1000)
 
+        var exercises =
+            {
+                TRX: {
+                    'Lower Body Workout': [
+                        {
+                            name: 'TRX Hamstring Curl',
+                            repetition: '12',
+                            rest: '30 sec'
+
+                        },
+                        {
+                            name: 'TRX Hip Press',
+                            repetition: '12',
+                            rest: '30 sec'
+
+                        },
+                        {
+                            name: 'TRX Squat',
+                            repetition: '12',
+                            rest: '30 sec'
+
+                        },
+                        {
+                            name: 'TRX Single-Leg Squat',
+                            repetition: '10 each leg',
+                            rest: '30 sec'
+
+                        },
+                        {
+                            name: 'TRX Lunge',
+                            repetition: '10 each leg',
+                            rest: '30 sec'
+
+                        },
+                        {
+                            name: 'TRX Squat',
+                            repetition: '10',
+                            rest: '30 sec'
+
+                        }
+                    ],
+                    'Upper Body Workout': [
+                        {
+                            name: 'TRX Low Row',
+                            repetition: '12',
+                            rest: '30 sec'
+
+                        },
+                        {
+                            name: 'TRX Chest Press',
+                            repetition: '12',
+                            rest: '30 sec'
+
+                        },
+                        {
+                            name: 'TRX Y Deltoid Fly',
+                            repetition: '12',
+                            rest: '30 sec'
+
+                        },
+                        {
+                            name: 'TRX Triceps Press',
+                            repetition: '12',
+                            rest: '30 sec'
+
+                        },
+                        {
+                            name: 'TRX Biceps Curl',
+                            repetition: '12',
+                            rest: '30 sec'
+
+                        },
+                        {
+                            name: 'TRX Split Fly',
+                            repetition: '12',
+                            rest: '30 sec'
+
+                        }
+                    ],
+                    'TRX Core Plus Workout': [
+                        {
+                            name: 'TRX Plank',
+                            repetition: '3 * 10 sec',
+                            rest: '30 sec'
+
+                        },
+                        {
+                            name: 'TRX Body Saw',
+                            repetition: '5',
+                            rest: '30 sec'
+
+                        },
+                        {
+                            name: 'TRX Side Plank',
+                            repetition: '3 * 10 sec each side',
+                            rest: '30 sec'
+
+                        },
+                        {
+                            name: 'TRX Hip Press',
+                            repetition: '10',
+                            rest: '30 sec'
+
+                        },
+                        {
+                            name: 'TRX Overhead Back Extension',
+                            repetition: '10',
+                            rest: '30 sec'
+
+                        },
+                        {
+                            name: 'TRX Overhead Squat',
+                            repetition: '5',
+                            rest: '30 sec'
+
+                        }
+                    ],
+                }
+            };
+
+        let tables = '';
+
+        for (let variable in exercises.TRX) {
+            tables += '<div class="ex_name">' + variable + '</div>' + '<table border="1">';
+            let iteration = 0;
+            for (let exercise of exercises.TRX[variable]) {
+                iteration++;
+                if (iteration === 1) {
+                    tables += '<tr>';
+                }
+                tables += '<td>' + exercise.name + '<br><br><img src="images/' + exercise.name.replace(' ', '%20') + '.jpg"></td><td>' + exercise.repetition + ' / ' + exercise.rest + '</td>';
+                if ((iteration % 2) === 0) {
+                    tables += '</tr>';
+                    iteration = 0;
+                }
+            }
+            tables += '</table>\n';
+        }
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+            document.getElementById('table').innerHTML = tables;
+        });
+
+    </script>
 </head>
 <body>
-<table border="1">
-    <tr>
-        <td>1<img src="images/TRX%20Hamstring%20Curl.jpg"></td>
-        <td>12 / 30 sec</td>
-        <td>2<img src="images/TRX%20Hip%20Press.jpg"></td>
-        <td>12 / 30 sec</td>
-    </tr>
-    <tr>
-        <td>3<img src="images/TRX%20Squat.jpg"></td>
-        <td>12 / 30 sec</td>
-        <td>4<img src="images/TRX%20Single-Leg%20Squat.jpg"></td>
-        <td>10 each leg / 30 sec</td>
-    </tr>
-    <tr>
-        <td>5<img src="images/TRX%20Lunge.jpg"></td>
-        <td>10 each leg / 30 sec</td>
-        <td>6<img src="images/TRX%20Squat.jpg"></td>
-        <td>10 / 30 sec</td>
-    </tr>
 
-</table>
+<div id='table'></div>
+
 <span id="timer">0</span>
-<div id="repeat"></div>
-<pie class="ten"></pie>
+<div style="display: none" id="repeat"></div>
+<pie style="display: none" class="ten"></pie>
 </body>
 </html>
